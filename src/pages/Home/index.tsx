@@ -1,4 +1,10 @@
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import { useState } from 'react'
+import {
+  Coffee as CoffeeIcon,
+  Package,
+  ShoppingCart,
+  Timer,
+} from 'phosphor-react'
 
 import {
   BlurBackground,
@@ -16,7 +22,20 @@ import { CoffeeCard } from './components/CoffeeCard'
 
 import CoffeeDeliveryBanner from '../../assets/coffee-delivery-banner.svg'
 
+import coffeesData from '../../coffees.json'
+
+export interface Coffee {
+  id: number
+  picture: string
+  name: string
+  description: string
+  tags: string[]
+  price: number
+}
+
 export function Home() {
+  const [coffees, setCoffees] = useState<Coffee[]>(coffeesData)
+
   return (
     <HomeContainer>
       {/* <BlurBackground /> */}
@@ -56,7 +75,7 @@ export function Home() {
 
             <Feature>
               <IconBadge color="purple-500">
-                <Coffee size={16} weight="fill" />
+                <CoffeeIcon size={16} weight="fill" />
               </IconBadge>
 
               <span>O café chega fresquinho até você</span>
@@ -71,13 +90,9 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <CoffeesList>
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {coffees.map((coffee) => (
+            <CoffeeCard key={coffee.id} coffee={coffee} />
+          ))}
         </CoffeesList>
       </CoffeesContainer>
     </HomeContainer>

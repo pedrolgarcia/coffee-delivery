@@ -65,7 +65,7 @@
   },
   {
     "id": 9,
-    "picture": "/src/assets/coffees/mocaccino.svg",
+    "picture": "/src/assets/coffees/mochaccino.svg",
     "name": "Mocaccino",
     "description": "Café expresso com calda de chocolate, pouco leite e espuma",
     "tags": ["Tradicional", "Com leite"],

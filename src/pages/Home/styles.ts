@@ -29,6 +29,10 @@ export const IntroContainer = styled.div`
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 1100px) {
+    flex-wrap: wrap;
+  }
+
   gap: 3.5rem;
 
   padding: 5.875rem 0;
@@ -59,6 +63,11 @@ export const FeaturesContainer = styled.div`
   grid-row-gap: 1.25rem;
 
   margin-top: 4.125rem;
+
+  @media (max-width: 670px) {
+    grid-template-columns: 1fr;
+    margin-top: 3rem;
+  }
 `
 
 export const Feature = styled.div`
