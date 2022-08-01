@@ -87,7 +87,7 @@ export function Home() {
       </IntroContainer>
 
       <CoffeesContainer>
-        <h2>Nossos cafés</h2>
+        <strong>Nossos cafés</strong>
 
         <CoffeesList>
           {coffees.map((coffee) => (

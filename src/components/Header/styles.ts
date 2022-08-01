@@ -1,9 +1,35 @@
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  padding: 2rem 0;
+
+  a {
+    width: 2.375rem;
+    height: 2.375rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    outline: 0;
+    border: none;
+
+    border-radius: 6px;
+    background-color: ${({ theme }) => theme['yellow-300']};
+
+    svg {
+      color: ${({ theme }) => theme['yellow-700']};
+    }
+
+    :focus {
+      box-shadow: 0 0 0 2px ${({ theme }) => theme['yellow-700']};
+    }
+  }
 `
 
 export const ButtonGroup = styled.div`
@@ -33,29 +59,5 @@ export const LocationBox = styled.div`
   span {
     font-size: 0.875rem;
     color: ${({ theme }) => theme['purple-700']};
-  }
-`
-
-export const CartButton = styled.button`
-  width: 2.375rem;
-  height: 2.375rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-  outline: 0;
-  border: none;
-
-  border-radius: 6px;
-  background-color: ${({ theme }) => theme['yellow-300']};
-
-  svg {
-    color: ${({ theme }) => theme['yellow-700']};
-  }
-
-  :focus {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme['yellow-700']};
   }
 `

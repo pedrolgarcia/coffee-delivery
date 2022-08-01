@@ -100,7 +100,7 @@ export const CoffeesContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  > h2 {
+  > strong {
     font-size: 2rem;
     font-family: 'Baloo 2';
     font-weight: 800;
