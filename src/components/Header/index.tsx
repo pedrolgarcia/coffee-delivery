@@ -14,7 +14,7 @@ export function Header() {
       <ButtonGroup>
         <LocationBox>
           <MapPin size={22} weight="fill" />
-          <span>Porto Alegre, RS</span>
+          <span>Rio de Janeiro, RJ</span>
         </LocationBox>
 
         <Link to="/checkout">
