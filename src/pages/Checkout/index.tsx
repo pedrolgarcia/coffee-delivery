@@ -1,4 +1,5 @@
 import { MapPin, MapPinLine } from 'phosphor-react'
+import { Input } from '../../components/Input'
 import {
   CheckoutContainer,
   CompleteOrder,
@@ -6,6 +7,8 @@ import {
   PaymentContainer,
   CartContainer,
   AddressHeader,
+  FormRow,
+  Form,
 } from './styles'
 
 export function Checkout() {
@@ -23,6 +26,27 @@ export function Checkout() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </AddressHeader>
+
+          <Form>
+            <FormRow>
+              <Input width={200} />
+            </FormRow>
+
+            <FormRow>
+              <Input />
+            </FormRow>
+
+            <FormRow>
+              <Input width={200} />
+              <Input />
+            </FormRow>
+
+            <FormRow>
+              <Input width={200} />
+              <Input />
+              <Input width={60} />
+            </FormRow>
+          </Form>
         </AddressContainer>
         <PaymentContainer></PaymentContainer>
       </CompleteOrder>

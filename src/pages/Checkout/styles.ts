@@ -28,18 +28,25 @@ export const AddressContainer = styled.div`
   background-color: ${({ theme }) => theme['gray-200']};
 
   margin-bottom: 0.75rem;
+  border-radius: 6px;
+
+  padding: 2.5rem;
 `
 
 export const AddressHeader = styled.div`
   display: flex;
 
+  margin-bottom: 2rem;
+
   > svg {
     color: ${({ theme }) => theme['yellow-700']};
+    margin-right: 0.5rem;
   }
 
   p:nth-of-type(1) {
     color: ${({ theme }) => theme['gray-800']};
     line-height: 1.3;
+    margin-bottom: 0.125rem;
   }
 
   p:nth-of-type(2) {
@@ -47,6 +54,17 @@ export const AddressHeader = styled.div`
     color: ${({ theme }) => theme['gray-700']};
     line-height: 1.3;
   }
+`
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+`
+
+export const FormRow = styled.div`
+  display: flex;
+  column-gap: 0.75rem;
 `
 
 export const PaymentContainer = styled.div`
