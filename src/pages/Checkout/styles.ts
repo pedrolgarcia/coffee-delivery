@@ -24,7 +24,7 @@ export const CompleteOrder = styled.div`
   }
 `
 
-export const AddressContainer = styled.div`
+export const BoxContainer = styled.div`
   background-color: ${({ theme }) => theme['gray-200']};
 
   margin-bottom: 0.75rem;
@@ -33,15 +33,10 @@ export const AddressContainer = styled.div`
   padding: 2.5rem;
 `
 
-export const AddressHeader = styled.div`
+export const BoxHeader = styled.div`
   display: flex;
 
   margin-bottom: 2rem;
-
-  > svg {
-    color: ${({ theme }) => theme['yellow-700']};
-    margin-right: 0.5rem;
-  }
 
   p:nth-of-type(1) {
     color: ${({ theme }) => theme['gray-800']};
@@ -54,6 +49,27 @@ export const AddressHeader = styled.div`
     color: ${({ theme }) => theme['gray-700']};
     line-height: 1.3;
   }
+`
+
+export const AddressHeader = styled(BoxHeader)`
+  > svg {
+    color: ${({ theme }) => theme['yellow-700']};
+    margin-right: 0.5rem;
+  }
+`
+
+export const PaymentHeader = styled(BoxHeader)`
+  > svg {
+    color: ${({ theme }) => theme['purple-500']};
+    margin-right: 0.5rem;
+  }
+`
+
+export const PaymentOptionsList = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 `
 
 export const Form = styled.form`
