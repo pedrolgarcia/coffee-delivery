@@ -16,6 +16,7 @@ import {
   IconBadge,
   CoffeesContainer,
   CoffeesList,
+  IntroBanner,
 } from './styles'
 
 import { CoffeeCard } from './components/CoffeeCard'
@@ -83,7 +84,9 @@ export function Home() {
           </FeaturesContainer>
         </IntroMain>
 
-        <img src={CoffeeDeliveryBanner} alt="" />
+        <IntroBanner>
+          <img src={CoffeeDeliveryBanner} alt="" />
+        </IntroBanner>
       </IntroContainer>
 
       <CoffeesContainer>

@@ -39,6 +39,9 @@ export const IntroContainer = styled.div`
 `
 
 export const IntroMain = styled.div`
+  display: flex;
+  flex-direction: column;
+
   h1 {
     font-size: 3rem;
     font-family: 'Baloo 2';
@@ -55,6 +58,10 @@ export const IntroMain = styled.div`
     color: ${({ theme }) => theme['gray-800']};
     line-height: 1.3;
   }
+`
+
+export const IntroBanner = styled.div`
+  display: flex;
 `
 
 export const FeaturesContainer = styled.div`
