@@ -30,6 +30,8 @@ interface CartContextData {
   // address: Address | null
   // paymentMethod: keyof typeof PAYMENT_METHODS | null
   cartItems: CartItem[]
+  subtotal: number
+  total: number
   addOrIncrementCartItem: (product: Product, quantity: number) => void
   incrementCartItem: (cartItemId: string) => void
   decrementCartItem: (cartItemId: string) => void
@@ -48,7 +50,12 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
 
   const { cartItems } = cartState
 
-  console.log('cartItems', cartItems)
+  const subtotal = cartItems.reduce((accumulator, cartItem) => {
+    accumulator += cartItem.product.price * cartItem.quantity
+    return accumulator
+  }, 0)
+
+  const total = subtotal
 
   function addOrIncrementCartItem(product: Product, quantity: number) {
     const foundedCartItem = cartItems.find(
@@ -80,6 +87,8 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
     <CartContext.Provider
       value={{
         cartItems,
+        subtotal,
+        total,
         addOrIncrementCartItem,
         incrementCartItem,
         decrementCartItem,
