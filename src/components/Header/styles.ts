@@ -6,6 +6,33 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
 
   padding: 2rem 0;
+`
+
+export const Badge = styled.div`
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 100px;
+
+  background-color: ${({ theme }) => theme['yellow-700']};
+
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  strong {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.white};
+  }
+`
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 0.75rem;
 
   a {
     width: 2.375rem;
@@ -22,6 +49,8 @@ export const HeaderContainer = styled.header`
     border-radius: 6px;
     background-color: ${({ theme }) => theme['yellow-300']};
 
+    position: relative;
+
     svg {
       color: ${({ theme }) => theme['yellow-700']};
     }
@@ -30,11 +59,6 @@ export const HeaderContainer = styled.header`
       box-shadow: 0 0 0 2px ${({ theme }) => theme['yellow-700']};
     }
   }
-`
-
-export const ButtonGroup = styled.div`
-  display: flex;
-  gap: 0.75rem;
 `
 
 export const LocationBox = styled.div`

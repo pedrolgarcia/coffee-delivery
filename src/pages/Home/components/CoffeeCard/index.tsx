@@ -1,3 +1,4 @@
+import { useContext, useState } from 'react'
 import { ShoppingCart } from 'phosphor-react'
 
 import {
@@ -11,20 +12,46 @@ import {
   Actions,
 } from './styles'
 
-import { Coffee } from '../..'
 import { QuantityController } from '../../../../components/QuantityController'
 
+import { CartContext } from '../../../../contexts/CartContext'
+
+import { Product } from '../..'
+
 interface CoffeeCardProps {
-  coffee: Coffee
+  coffee: Product
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const brlPrice = coffee.price
+  const [quantity, setQuantity] = useState(1)
+
+  const { addOrIncrementCartItem } = useContext(CartContext)
+
+  const total = coffee.price * quantity
+
+  const brlTotal = total
     .toLocaleString('pt-br', {
       style: 'currency',
       currency: 'BRL',
     })
     .replace('R$', '')
+
+  function handleAddOrIncrementCartItem() {
+    addOrIncrementCartItem(coffee, quantity)
+    resetProductQuantity()
+  }
+
+  function incrementProduct() {
+    setQuantity((state) => state + 1)
+  }
+
+  function decrementProduct() {
+    setQuantity((state) => state - 1)
+  }
+
+  function resetProductQuantity() {
+    setQuantity(1)
+  }
 
   return (
     <CoffeeCardContainer>
@@ -47,13 +74,18 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       <Footer>
         <Price>
           <p>
-            R$<strong>{brlPrice}</strong>
+            R$<strong>{brlTotal}</strong>
           </p>
         </Price>
 
         <Actions>
-          <QuantityController />
-          <AddToCartButton>
+          <QuantityController
+            quantity={quantity}
+            increment={incrementProduct}
+            decrement={decrementProduct}
+          />
+
+          <AddToCartButton onClick={handleAddOrIncrementCartItem}>
             <ShoppingCart size={22} weight="fill" />
           </AddToCartButton>
         </Actions>

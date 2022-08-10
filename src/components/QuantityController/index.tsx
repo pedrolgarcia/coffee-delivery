@@ -1,16 +1,23 @@
 import { Minus, Plus } from 'phosphor-react'
-import { useState } from 'react'
 import { QuantityButton, QuantityControllerContainer } from './styles'
 
-export function QuantityController() {
-  const [quantity, setQuantity] = useState(1)
+interface QuantityControllerProps {
+  quantity: number
+  increment: () => void
+  decrement: () => void
+}
 
+export function QuantityController({
+  quantity,
+  increment,
+  decrement,
+}: QuantityControllerProps) {
   function handleIncrement() {
-    setQuantity((state) => state + 1)
+    increment()
   }
 
   function handleDecrement() {
-    setQuantity((state) => state - 1)
+    decrement()
   }
 
   return (

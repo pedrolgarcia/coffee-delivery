@@ -23,9 +23,9 @@ import { CoffeeCard } from './components/CoffeeCard'
 
 import CoffeeDeliveryBanner from '../../assets/coffee-delivery-banner.svg'
 
-import coffeesData from '../../coffees.json'
+import coffees from '../../coffees.json'
 
-export interface Coffee {
+export interface Product {
   id: number
   picture: string
   name: string
@@ -35,7 +35,7 @@ export interface Coffee {
 }
 
 export function Home() {
-  const [coffees, setCoffees] = useState<Coffee[]>(coffeesData)
+  const [products, setProducts] = useState<Product[]>(coffees)
 
   return (
     <HomeContainer>
@@ -93,8 +93,8 @@ export function Home() {
         <strong>Nossos cafés</strong>
 
         <CoffeesList>
-          {coffees.map((coffee) => (
-            <CoffeeCard key={coffee.id} coffee={coffee} />
+          {products.map((product) => (
+            <CoffeeCard key={product.id} coffee={product} />
           ))}
         </CoffeesList>
       </CoffeesContainer>
