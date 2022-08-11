@@ -1,25 +1,27 @@
+import { useState } from 'react'
 import { Actions, CartItemContainer, CoffeeInfo } from './styles'
 
 import { QuantityController } from '../../../../../../components/QuantityController'
 
-import { Coffee } from '../../../../../Home'
+import * as CartItemType from '../../../../../../reducers/cartItems/reducer'
 
 interface CartItemProps {
-  coffee: Coffee
+  cartItem: CartItemType.CartItem
 }
 
-export function CartItem({ coffee }: CartItemProps) {
+export function CartItem({ cartItem }: CartItemProps) {
+  const [quantity, setQuantity] = useState(cartItem.quantity)
   return (
     <CartItemContainer>
       <CoffeeInfo>
-        <img src={coffee.picture} alt="" />
+        <img src={cartItem.product.picture} alt="" />
 
         <Actions>
-          <span>{coffee.name}</span>
+          <span>{cartItem.product.name}</span>
           <QuantityController />
         </Actions>
 
-        <strong>{coffee.price}</strong>
+        <strong>{cartItem.product.price}</strong>
       </CoffeeInfo>
     </CartItemContainer>
   )
