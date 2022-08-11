@@ -4,7 +4,7 @@ export const QuantityControllerContainer = styled.div`
   background-color: ${({ theme }) => theme['gray-400']};
 
   padding: 0.5rem;
-  height: 2.375rem;
+  height: 2rem;
   border-radius: 6px;
 
   display: flex;

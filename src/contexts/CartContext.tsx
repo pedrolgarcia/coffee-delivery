@@ -4,6 +4,7 @@ import {
   addNewItemToCartAction,
   decrementCartItemQuantityAction,
   incrementCartItemQuantityAction,
+  removeItemFromCartAction,
 } from '../reducers/cartItems/actions'
 
 import { CartItem, cartItemsReducer } from '../reducers/cartItems/reducer'
@@ -33,6 +34,7 @@ interface CartContextData {
   subtotal: number
   total: number
   addOrIncrementCartItem: (product: Product, quantity: number) => void
+  removeItemFromCart: (cartItemId: string) => void
   incrementCartItem: (cartItemId: string) => void
   decrementCartItem: (cartItemId: string) => void
 }
@@ -63,16 +65,23 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
     )
 
     if (!foundedCartItem) {
+      const total = parseFloat((product.price * quantity).toFixed(2))
+
       const cartItem: CartItem = {
         id: uuidv4(),
         product,
         quantity,
+        total,
       }
 
       dispatch(addNewItemToCartAction(cartItem))
     } else {
       dispatch(incrementCartItemQuantityAction(foundedCartItem.id, quantity))
     }
+  }
+
+  function removeItemFromCart(cartItemId: string) {
+    dispatch(removeItemFromCartAction(cartItemId))
   }
 
   function incrementCartItem(cartItemId: string) {
@@ -90,6 +99,7 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
         subtotal,
         total,
         addOrIncrementCartItem,
+        removeItemFromCart,
         incrementCartItem,
         decrementCartItem,
       }}

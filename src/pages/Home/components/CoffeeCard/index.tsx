@@ -17,6 +17,7 @@ import { QuantityController } from '../../../../components/QuantityController'
 import { CartContext } from '../../../../contexts/CartContext'
 
 import { Product } from '../..'
+import { formatValueToBrl } from '../../../../utils/helpers'
 
 interface CoffeeCardProps {
   coffee: Product
@@ -28,13 +29,6 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const { addOrIncrementCartItem } = useContext(CartContext)
 
   const total = coffee.price * quantity
-
-  const brlTotal = total
-    .toLocaleString('pt-br', {
-      style: 'currency',
-      currency: 'BRL',
-    })
-    .replace('R$', '')
 
   function handleAddOrIncrementCartItem() {
     addOrIncrementCartItem(coffee, quantity)
@@ -74,7 +68,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       <Footer>
         <Price>
           <p>
-            R$<strong>{brlTotal}</strong>
+            R$<strong>{formatValueToBrl(total).replace('R$', '')}</strong>
           </p>
         </Price>
 

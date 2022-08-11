@@ -6,6 +6,7 @@ export interface CartItem {
   id: string
   product: Product
   quantity: number
+  total: number
 }
 
 interface CartItemState {
@@ -26,9 +27,13 @@ export function cartItemsReducer(state: CartItemState, action: CartItemAction) {
 
     case ActionTypes.REMOVE_ITEM_FROM_CART:
       return produce(state, (draft) => {
-        draft.cartItems.filter(
-          (cartItem) => cartItem.id !== action.payload.cartItemId,
+        const cartItemIndex = state.cartItems.findIndex(
+          (cartItem) => cartItem.id === action.payload.cartItemId,
         )
+
+        if (cartItemIndex < 0) return state
+
+        draft.cartItems.splice(cartItemIndex, 1)
       })
 
     case ActionTypes.INCREMENT_CART_ITEM_QUANTITY: {
@@ -39,7 +44,15 @@ export function cartItemsReducer(state: CartItemState, action: CartItemAction) {
       if (cartItemIndex < 0) return state
 
       return produce(state, (draft) => {
-        draft.cartItems[cartItemIndex].quantity += action.payload.quantity
+        const cartItem = draft.cartItems[cartItemIndex]
+
+        cartItem.quantity += action.payload.quantity
+
+        cartItem.total = parseFloat(
+          (cartItem.quantity * cartItem.product.price).toFixed(2),
+        )
+
+        draft.cartItems[cartItemIndex] = cartItem
       })
     }
 
@@ -51,10 +64,18 @@ export function cartItemsReducer(state: CartItemState, action: CartItemAction) {
       if (cartItemIndex < 0) return state
 
       return produce(state, (draft) => {
-        if (draft.cartItems[cartItemIndex].quantity === 1) {
+        const cartItem = draft.cartItems[cartItemIndex]
+
+        if (cartItem.quantity === 1) {
           draft.cartItems.splice(cartItemIndex, 1)
         } else {
-          draft.cartItems[cartItemIndex].quantity -= 1
+          cartItem.quantity -= 1
+
+          cartItem.total = parseFloat(
+            (cartItem.quantity * cartItem.product.price).toFixed(2),
+          )
+
+          draft.cartItems[cartItemIndex] = cartItem
         }
       })
     }
