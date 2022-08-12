@@ -1,12 +1,18 @@
 import styled from 'styled-components'
 
 export const CheckoutContainer = styled.div`
+  display: flex;
+`
+
+export const Form = styled.form`
   display: grid;
   grid-template-columns: 1.5fr 1fr;
 
   column-gap: 2rem;
 
   margin-top: 2.5rem;
+
+  width: 100%;
 `
 
 export const CompleteOrderColumn = styled.div`

@@ -1,15 +1,18 @@
+import { useFormContext } from 'react-hook-form'
 import { MapPinLine } from 'phosphor-react'
 
 import {
   AddressStepContainer,
   AddressStepHeader,
-  Form,
+  FormContainer,
   FormRow,
 } from './styles'
 
 import { Input } from '../../../../components/Input'
 
 export function AddressStep() {
+  const { register } = useFormContext()
+
   return (
     <AddressStepContainer>
       <AddressStepHeader>
@@ -21,26 +24,30 @@ export function AddressStep() {
         </div>
       </AddressStepHeader>
 
-      <Form>
+      <FormContainer>
         <FormRow>
-          <Input placeholder="CEP" width={200} required />
+          <Input placeholder="CEP" width={200} {...register('zipcode')} />
         </FormRow>
 
         <FormRow>
-          <Input placeholder="Rua" required />
+          <Input placeholder="Rua" {...register('street')} />
         </FormRow>
 
         <FormRow>
-          <Input placeholder="Número" width={200} required />
-          <Input placeholder="Complemento" />
+          <Input placeholder="Número" width={200} {...register('number')} />
+          <Input
+            placeholder="Complemento"
+            optional
+            {...register('complement')}
+          />
         </FormRow>
 
         <FormRow>
-          <Input placeholder="Bairro" width={200} required />
-          <Input placeholder="Cidade" required />
-          <Input placeholder="UF" width={60} required />
+          <Input placeholder="Bairro" width={200} {...register('district')} />
+          <Input placeholder="Cidade" {...register('city')} />
+          <Input placeholder="UF" width={60} {...register('state')} />
         </FormRow>
-      </Form>
+      </FormContainer>
     </AddressStepContainer>
   )
 }

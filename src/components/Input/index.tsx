@@ -3,13 +3,14 @@ import { InputContainer } from './styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number
+  optional?: boolean
 }
 
-export function Input({ width, ...rest }: InputProps) {
+export function Input({ width, optional, ...rest }: InputProps) {
   return (
-    <InputContainer width={width} optional={!rest.required}>
+    <InputContainer width={width} optional={!!optional}>
       <input {...rest} />
-      {!rest.required && <span>Opcional</span>}
+      {!!optional && <span>Opcional</span>}
     </InputContainer>
   )
 }

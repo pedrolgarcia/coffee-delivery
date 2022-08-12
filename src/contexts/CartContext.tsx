@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useReducer, useState } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+
 import {
   addNewItemToCartAction,
   decrementCartItemQuantityAction,
@@ -11,25 +12,7 @@ import { CartItem, cartItemsReducer } from '../reducers/cartItems/reducer'
 
 import { Product } from '../pages/Home'
 
-// export interface Address {
-//   zipcode: string
-//   street: string
-//   number: string
-//   complement?: string
-//   district: string
-//   city: string
-//   state: string
-// }
-
-// const PAYMENT_METHODS = {
-//   creditCard: 'CREDIT_CARD',
-//   debitCard: 'DEBIT_CARD',
-//   cash: 'CASH',
-// } as const
-
 interface CartContextData {
-  // address: Address | null
-  // paymentMethod: keyof typeof PAYMENT_METHODS | null
   cartItems: CartItem[]
   subtotal: number
   total: number
