@@ -9,6 +9,7 @@ import {
 } from './styles'
 
 import { CartItem } from './components/CartItem'
+import { Button } from '../../../../components/Button'
 
 import { CartContext } from '../../../../contexts/CartContext'
 
@@ -22,6 +23,7 @@ export function Cart() {
       {cartItems.map((cartItem) => (
         <CartItem key={cartItem.id} cartItem={cartItem} />
       ))}
+
       <TotalContainer>
         <SubTotal>
           <span>Total de itens</span>
@@ -38,6 +40,8 @@ export function Cart() {
           <strong>{formatValueToBrl(total)}</strong>
         </Total>
       </TotalContainer>
+
+      <Button text="CONFIRMAR PEDIDO" disabled={cartItems.length === 0} />
     </CartContainer>
   )
 }
