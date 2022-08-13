@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import {
   addNewItemToCartAction,
+  clearCartAction,
   decrementCartItemQuantityAction,
   incrementCartItemQuantityAction,
   removeItemFromCartAction,
@@ -20,6 +21,7 @@ interface CartContextData {
   removeItemFromCart: (cartItemId: string) => void
   incrementCartItem: (cartItemId: string) => void
   decrementCartItem: (cartItemId: string) => void
+  clearCart: () => void
 }
 
 export const CartContext = createContext({} as CartContextData)
@@ -39,11 +41,9 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
         '@coffee-delivery:cart-items-state:1.0.0',
       )
 
-      if (storedStateAsJSON) {
-        return JSON.parse(storedStateAsJSON)
-      } else {
-        return []
-      }
+      if (!storedStateAsJSON) return []
+
+      return JSON.parse(storedStateAsJSON)
     },
   )
 
@@ -86,6 +86,10 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
     dispatch(removeItemFromCartAction(cartItemId))
   }
 
+  function clearCart() {
+    dispatch(clearCartAction())
+  }
+
   function incrementCartItem(cartItemId: string) {
     dispatch(incrementCartItemQuantityAction(cartItemId))
   }
@@ -104,6 +108,7 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
         removeItemFromCart,
         incrementCartItem,
         decrementCartItem,
+        clearCart,
       }}
     >
       {children}

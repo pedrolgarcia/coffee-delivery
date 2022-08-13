@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -28,7 +29,7 @@ const addressFormValidationSchema = zod.object({
   state: zod.string().min(1, 'Campo obrigatório'),
 })
 
-type AddressFormData = zod.infer<typeof addressFormValidationSchema>
+export type AddressFormData = zod.infer<typeof addressFormValidationSchema>
 
 export const PAYMENT_METHODS = {
   CREDIT_CARD: 'CREDIT_CARD',
@@ -45,7 +46,9 @@ export interface Order {
 }
 
 export function Checkout() {
-  const { cartItems } = useContext(CartContext)
+  const navigate = useNavigate()
+
+  const { cartItems, clearCart } = useContext(CartContext)
 
   const addressForm = useForm<AddressFormData>({
     resolver: zodResolver(addressFormValidationSchema),
@@ -71,7 +74,13 @@ export function Checkout() {
       cartItems,
     }
 
-    console.log(orderData)
+    navigate('/success', {
+      state: {
+        order: orderData,
+      },
+    })
+
+    clearCart()
   }
 
   return (

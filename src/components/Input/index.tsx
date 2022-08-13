@@ -23,6 +23,7 @@ export function Input({
         <Controller
           control={control}
           name={rest.name}
+          defaultValue={''}
           render={({ field: { value, onChange } }) => (
             <input value={value} onChange={onChange} {...rest} />
           )}

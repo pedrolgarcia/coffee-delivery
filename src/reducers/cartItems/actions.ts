@@ -3,6 +3,7 @@ import { CartItem } from './reducer'
 export enum ActionTypes {
   ADD_NEW_ITEM_TO_CART = 'ADD_NEW_ITEM_TO_CART',
   REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART',
+  CLEAR_CART = 'CLEAR_CART',
   INCREMENT_CART_ITEM_QUANTITY = 'INCREMENT_CART_ITEM_QUANTITY',
   DECREMENT_CART_ITEM_QUANTITY = 'DECREMENT_CART_ITEM_QUANTITY',
 }
@@ -22,6 +23,12 @@ export function removeItemFromCartAction(cartItemId: string) {
     payload: {
       cartItemId,
     },
+  }
+}
+
+export function clearCartAction() {
+  return {
+    type: ActionTypes.CLEAR_CART,
   }
 }
 

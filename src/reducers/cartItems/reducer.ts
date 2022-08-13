@@ -15,7 +15,7 @@ interface CartItemState {
 
 interface CartItemAction {
   type: string
-  payload: any
+  payload?: any
 }
 
 export function cartItemsReducer(state: CartItemState, action: CartItemAction) {
@@ -34,6 +34,11 @@ export function cartItemsReducer(state: CartItemState, action: CartItemAction) {
         if (cartItemIndex < 0) return state
 
         draft.cartItems.splice(cartItemIndex, 1)
+      })
+
+    case ActionTypes.CLEAR_CART:
+      return produce(state, (draft) => {
+        draft.cartItems = []
       })
 
     case ActionTypes.INCREMENT_CART_ITEM_QUANTITY: {
