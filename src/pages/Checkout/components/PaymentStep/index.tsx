@@ -10,16 +10,18 @@ import {
 import { PaymentMethod, PAYMENT_METHODS } from '../..'
 
 interface PaymentStepProps {
-  selectedPaymenMethod: PaymentMethod
-  selectPaymenMethod: (paymentMethod: PaymentMethod) => void
+  selectedPaymentMethod: PaymentMethod
+  selectPaymentMethod: (paymentMethod: PaymentMethod) => void
+  showsRequiredError: boolean
 }
 
 export function PaymentStep({
-  selectedPaymenMethod,
-  selectPaymenMethod,
+  selectedPaymentMethod,
+  selectPaymentMethod,
+  showsRequiredError,
 }: PaymentStepProps) {
-  function handleSelectPaymenMethod(paymentMethod: PaymentMethod) {
-    selectPaymenMethod(paymentMethod)
+  function handleSelectPaymentMethod(paymentMethod: PaymentMethod) {
+    selectPaymentMethod(paymentMethod)
   }
 
   return (
@@ -37,24 +39,27 @@ export function PaymentStep({
 
       <PaymentOptionsList>
         <PaymentOption
-          selected={selectedPaymenMethod === PAYMENT_METHODS.CREDIT_CARD}
-          onClick={() => handleSelectPaymenMethod(PAYMENT_METHODS.CREDIT_CARD)}
+          selected={selectedPaymentMethod === PAYMENT_METHODS.CREDIT_CARD}
+          onClick={() => handleSelectPaymentMethod(PAYMENT_METHODS.CREDIT_CARD)}
+          requiredError={showsRequiredError}
         >
           <CreditCard size={16} />
           <span>Cartão de crédito</span>
         </PaymentOption>
 
         <PaymentOption
-          selected={selectedPaymenMethod === PAYMENT_METHODS.DEBIT_CARD}
-          onClick={() => handleSelectPaymenMethod(PAYMENT_METHODS.DEBIT_CARD)}
+          selected={selectedPaymentMethod === PAYMENT_METHODS.DEBIT_CARD}
+          onClick={() => handleSelectPaymentMethod(PAYMENT_METHODS.DEBIT_CARD)}
+          requiredError={showsRequiredError}
         >
           <Bank size={16} />
           <span>Cartão de débito</span>
         </PaymentOption>
 
         <PaymentOption
-          selected={selectedPaymenMethod === PAYMENT_METHODS.CASH}
-          onClick={() => handleSelectPaymenMethod(PAYMENT_METHODS.CASH)}
+          selected={selectedPaymentMethod === PAYMENT_METHODS.CASH}
+          onClick={() => handleSelectPaymentMethod(PAYMENT_METHODS.CASH)}
+          requiredError={showsRequiredError}
         >
           <Money size={16} />
           <span>Dinheiro</span>

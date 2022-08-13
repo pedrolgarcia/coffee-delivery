@@ -11,7 +11,10 @@ import {
 import { Input } from '../../../../components/Input'
 
 export function AddressStep() {
-  const { register } = useFormContext()
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext()
 
   return (
     <AddressStepContainer>
@@ -26,26 +29,62 @@ export function AddressStep() {
 
       <FormContainer>
         <FormRow>
-          <Input placeholder="CEP" width={200} {...register('zipcode')} />
-        </FormRow>
-
-        <FormRow>
-          <Input placeholder="Rua" {...register('street')} />
-        </FormRow>
-
-        <FormRow>
-          <Input placeholder="Número" width={200} {...register('number')} />
           <Input
-            placeholder="Complemento"
-            optional
-            {...register('complement')}
+            control={control}
+            name="zipcode"
+            placeholder="CEP"
+            width={200}
+            error={errors?.zipcode?.message}
           />
         </FormRow>
 
         <FormRow>
-          <Input placeholder="Bairro" width={200} {...register('district')} />
-          <Input placeholder="Cidade" {...register('city')} />
-          <Input placeholder="UF" width={60} {...register('state')} />
+          <Input
+            control={control}
+            name="street"
+            placeholder="Rua"
+            error={errors?.street?.message}
+          />
+        </FormRow>
+
+        <FormRow>
+          <Input
+            control={control}
+            name="number"
+            placeholder="Número"
+            width={200}
+            error={errors?.number?.message}
+          />
+          <Input
+            control={control}
+            name="complement"
+            placeholder="Complemento"
+            optional
+            error={errors?.complement?.message}
+          />
+        </FormRow>
+
+        <FormRow>
+          <Input
+            control={control}
+            name="district"
+            placeholder="Bairro"
+            width={200}
+            error={errors?.district?.message}
+          />
+          <Input
+            control={control}
+            name="city"
+            placeholder="Cidade"
+            error={errors?.city?.message}
+          />
+          <Input
+            control={control}
+            name="state"
+            placeholder="UF"
+            width={60}
+            error={errors?.state?.message}
+          />
         </FormRow>
       </FormContainer>
     </AddressStepContainer>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,6 +13,10 @@ import {
 import { Cart } from './components/Cart'
 import { AddressStep } from './components/AddressStep'
 import { PaymentStep } from './components/PaymentStep'
+
+import { CartItem } from '../../reducers/cartItems/reducer'
+
+import { CartContext } from '../../contexts/CartContext'
 
 const addressFormValidationSchema = zod.object({
   zipcode: zod.string().min(1, 'Campo obrigatório'),
@@ -34,22 +38,40 @@ export const PAYMENT_METHODS = {
 
 export type PaymentMethod = keyof typeof PAYMENT_METHODS | null
 
+export interface Order {
+  address: AddressFormData
+  paymentMethod: PaymentMethod
+  cartItems: CartItem[]
+}
+
 export function Checkout() {
+  const { cartItems } = useContext(CartContext)
+
   const addressForm = useForm<AddressFormData>({
     resolver: zodResolver(addressFormValidationSchema),
   })
 
-  const { handleSubmit } = addressForm
+  const { handleSubmit, formState } = addressForm
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethod>(null)
 
-  function selectPaymenMethod(paymentMethod: PaymentMethod) {
+  const [order, setOrder] = useState<Order | null>(null)
+
+  function selectPaymentMethod(paymentMethod: PaymentMethod) {
     setSelectedPaymentMethod(paymentMethod)
   }
 
   function submitOrder(data: AddressFormData) {
-    console.log(data)
+    if (!selectedPaymentMethod) return
+
+    const addressData = { ...data }
+
+    const orderData: Order = {
+      address: addressData,
+      paymentMethod: selectedPaymentMethod,
+      cartItems,
+    }
   }
 
   return (
@@ -63,8 +85,9 @@ export function Checkout() {
           </FormProvider>
 
           <PaymentStep
-            selectedPaymenMethod={selectedPaymentMethod}
-            selectPaymenMethod={selectPaymenMethod}
+            selectedPaymentMethod={selectedPaymentMethod}
+            selectPaymentMethod={selectPaymentMethod}
+            showsRequiredError={formState.isSubmitted && !selectedPaymentMethod}
           />
         </CompleteOrderColumn>
 

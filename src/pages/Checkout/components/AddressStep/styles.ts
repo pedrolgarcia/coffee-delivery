@@ -32,7 +32,7 @@ export const AddressStepHeader = styled.header`
   }
 `
 
-export const FormContainer = styled.form`
+export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 1rem;

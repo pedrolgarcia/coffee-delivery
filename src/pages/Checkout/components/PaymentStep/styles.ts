@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 interface PaymentOptionContainerProps {
   selected: boolean
+  requiredError: boolean
 }
 
 export const PaymentStepContainer = styled.div`
@@ -70,6 +71,14 @@ export const PaymentOption = styled.div<PaymentOptionContainerProps>`
             color: ${({ theme }) => theme['gray-800']};
           }
         }
+      `
+    }
+  }}
+
+  ${({ requiredError }) => {
+    if (requiredError) {
+      return css`
+        border: 1px solid red;
       `
     }
   }}

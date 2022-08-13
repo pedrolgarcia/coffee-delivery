@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 interface InputContainerProps {
   width?: number
   optional?: boolean
+  error?: boolean
 }
 
 export const InputContainer = styled.div<InputContainerProps>`
@@ -38,6 +39,12 @@ export const InputContainer = styled.div<InputContainerProps>`
       optional &&
       css`
         padding-right: 3.875rem;
+      `}
+
+    ${({ error }) =>
+      error &&
+      css`
+        border: 1px solid red;
       `}
   }
 
