@@ -1,5 +1,5 @@
 <p align="center">
-  <img src='https://github.com/pedrolgarcia/pedrolgarcia/blob/main/assets/logo-ignite.svg' />
+  <img src='https://github.com/pedrolgarcia/pedrolgarcia/blob/main/assets/logo-ignite.png' />
 </p>
 
 <p align="center"><b>Desafio 02: Coffee Delivery</b></p>
