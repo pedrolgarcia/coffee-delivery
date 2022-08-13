@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import {
@@ -29,9 +29,23 @@ interface CyclesContextProviderProps {
 }
 
 export function CartContextProvider({ children }: CyclesContextProviderProps) {
-  const [cartState, dispatch] = useReducer(cartItemsReducer, {
-    cartItems: [],
-  })
+  const [cartState, dispatch] = useReducer(
+    cartItemsReducer,
+    {
+      cartItems: [],
+    },
+    () => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@coffee-delivery:cart-items-state:1.0.0',
+      )
+
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON)
+      } else {
+        return []
+      }
+    },
+  )
 
   const { cartItems } = cartState
 
@@ -41,6 +55,11 @@ export function CartContextProvider({ children }: CyclesContextProviderProps) {
   }, 0)
 
   const total = subtotal
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cartState)
+    localStorage.setItem('@coffee-delivery:cart-items-state:1.0.0', stateJSON)
+  }, [cartState, cartState.cartItems])
 
   function addOrIncrementCartItem(product: Product, quantity: number) {
     const foundedCartItem = cartItems.find(

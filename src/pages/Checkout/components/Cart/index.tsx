@@ -41,7 +41,7 @@ export function Cart() {
         </Total>
       </TotalContainer>
 
-      <Button text="CONFIRMAR PEDIDO" />
+      <Button text="CONFIRMAR PEDIDO" disabled={cartItems.length === 0} />
     </CartContainer>
   )
 }

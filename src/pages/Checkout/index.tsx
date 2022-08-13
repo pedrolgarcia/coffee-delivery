@@ -56,8 +56,6 @@ export function Checkout() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethod>(null)
 
-  const [order, setOrder] = useState<Order | null>(null)
-
   function selectPaymentMethod(paymentMethod: PaymentMethod) {
     setSelectedPaymentMethod(paymentMethod)
   }
@@ -72,6 +70,8 @@ export function Checkout() {
       paymentMethod: selectedPaymentMethod,
       cartItems,
     }
+
+    console.log(orderData)
   }
 
   return (
